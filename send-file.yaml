@@ -1,0 +1,17 @@
+- hosts: all
+  tasks:
+  - name: Copy file from local to remote
+    copy:
+      src: ./daemon.json
+      dest: /etc/docker
+    notify: restart docker
+
+
+
+
+
+handlers:
+  - name: restart docker
+    service: 
+      name: docker 
+      state: restarted
