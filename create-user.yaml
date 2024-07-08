@@ -31,3 +31,11 @@
     - name: Print a message
       ansible.builtin.debug:
         msg: 'Logging in as {{ username }} {{ password  }}'
+
+
+    - name: Make sudo without password for {{ username }} user
+      copy:
+        dest: /etc/sudoers.d/80-ansible-sudo-user
+        #content: "{{ username }} ALL=(ALL) NOPASSWD:ALL"
+        content: "{{ username }} ALL=(ALL) ALL"
+        mode: 0440
